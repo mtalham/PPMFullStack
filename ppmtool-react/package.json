@@ -1,0 +1,54 @@
+{
+  "name": "ppmtool-react",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@apollo/react-hoc": "^3.0.1",
+    "@apollo/react-hooks": "^3.0.1",
+    "apollo-cache-inmemory": "^1.6.2",
+    "apollo-client": "^2.6.3",
+    "apollo-link": "^1.2.12",
+    "apollo-link-http": "^1.5.15",
+    "axios": "^0.18.0",
+    "bootstrap": "^4.3.1",
+    "classnames": "^2.2.6",
+    "graphql": "^14.4.2",
+    "graphql-tag": "^2.10.1",
+    "jwt-decode": "^2.2.0",
+    "moment": "^2.24.0",
+    "prettier": "^1.17.1",
+    "prop-types": "latest",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-modal": "^3.10.1",
+    "react-redux": "^7.0.3",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "3.0.1",
+    "react-select": "^3.0.4",
+    "redux": "^4.0.1",
+    "redux-form": "^8.2.1",
+    "redux-thunk": "^2.3.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "proxy": "http://localhost:8080"
+}
