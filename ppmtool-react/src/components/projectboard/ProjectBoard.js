@@ -1,11 +1,12 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, {useState} from "react";
+import {Link} from "react-router-dom";
 import Backlog from "./Backlog";
-import { connect } from "react-redux";
-import { getBacklog } from "../../actions/backlogActions";
+import {connect} from "react-redux";
+import {getBacklog} from "../../actions/backlogActions";
 import Users from "../users/Users";
+import {getProjectAccess} from "../../actions/ProjectActions";
 
-const ProjectBoardError = ({ error }) =>
+const ProjectBoardError = ({error}) =>
   error.length > 0 ? (
     <div className="alert alert-danger text-center" role="alert">
       {error}.
@@ -16,31 +17,32 @@ const ProjectBoardError = ({ error }) =>
     </div>
   );
 
-const ProjectBoard = ({ match, backlog, errors, getBacklog }) => {
+const ProjectBoard = ({match, backlog, errors, getBacklog, getProjectAccess, access}) => {
   const [openModal, setOpenModal] = useState(false);
 
-  const { id } = match.params;
+  const {id} = match.params;
   React.useEffect(() => {
+    getProjectAccess(id);
     getBacklog(id);
     // eslint-disable-next-line
   }, [id]);
 
   return (
     <div className="container">
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <Link to={`/addProjectTask/${id}`} className="btn btn-primary">
+      <div style={{display: "flex", justifyContent: "space-between"}}>
+        {access && <Link to={`/addProjectTask/${id}`} disabled className="btn btn-primary">
           <i className="fas fa-plus-circle"> Create Project Task</i>
-        </Link>
-        <div className="btn btn-primary">
+        </Link>}
+        <button className="btn btn-primary" disabled={!access}>
           <i className="fas fa-plus-circle" onClick={() => setOpenModal(true)}>
             Add User
           </i>
-        </div>
+        </button>
       </div>
-      <br />
-      <hr />
+      <br/>
+      <hr/>
       {backlog.projectTasks.length === 0 ? (
-        <ProjectBoardError error={errors} />
+        <ProjectBoardError error={errors}/>
       ) : (
         <Backlog projectTasks={backlog.projectTasks} />
       )}
@@ -56,11 +58,12 @@ const ProjectBoard = ({ match, backlog, errors, getBacklog }) => {
 };
 
 const mapStateToProps = state => ({
+  access: state.project.hasAccess,
   backlog: state.backlog,
   errors: state.errors
 });
 
 export default connect(
   mapStateToProps,
-  { getBacklog }
+  {getBacklog, getProjectAccess}
 )(ProjectBoard);

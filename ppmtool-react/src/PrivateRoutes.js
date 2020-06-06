@@ -8,7 +8,6 @@ import UpdateProject from "./components/project/UpdateProject";
 import ProjectBoard from "./components/projectboard/ProjectBoard";
 import AddProjectTask from "./components/projectboard/projecttask/AddProjectTask";
 import UpdateProjectTask from "./components/projectboard/projecttask/UpdateProjectTask";
-import Users from "./components/users/Users";
 
 const PrivateRoutes = () => (
   <Switch>

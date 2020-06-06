@@ -44,6 +44,7 @@ const Users = ({ openModal, setOpenModal, projectId }) => {
         isOpen={openModal}
         onRequestClose={() => setOpenModal(false)}
         style={customStyles}
+        ariaHideApp={false}
       >
         <AddUserToProject options={options} onSubmit={handleOnSubmit} />
       </Modal>

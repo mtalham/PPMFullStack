@@ -2,6 +2,7 @@ package fullstack.development.ppmtool.services
 
 import fullstack.development.ppmtool.domain.User
 import fullstack.development.ppmtool.exceptions.ProjectException
+import fullstack.development.ppmtool.exceptions.validate
 import fullstack.development.ppmtool.repositories.UserRepository
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service
 @Service
 class UserService(private val userRepository: UserRepository, private val bCryptPasswordEncoder: BCryptPasswordEncoder) {
     fun registerUser(user: User): User {
-        require(user.fullName.isNotBlank()) { throw ProjectException("Name cannot be blank") }
+        validate(user.fullName.isNotBlank()) { "Name cannot be blank" }
         val newUser = User(
             user.username, user.fullName,
             bCryptPasswordEncoder.encode(user.password),

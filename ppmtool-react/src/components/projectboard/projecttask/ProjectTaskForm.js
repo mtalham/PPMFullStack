@@ -2,7 +2,6 @@ import React from "react";
 import { Field, reduxForm } from "redux-form";
 import { renderField } from "../../project/ProjectUtils";
 import { projectTaskValidator as validate } from "../../project/ProjectUtils";
-import { RenderSelectInput } from "../../layout/SuggestSelect";
 
 const priorityOptions = [
   <option key={1} value="">Select Priority</option>,

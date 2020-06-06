@@ -20,4 +20,9 @@ class ProjectUserService(
     }
 
     fun getProjectUserByUserId(userId: Long) = projectUserRepository.findByUserId(userId)
+
+    fun getProjectUserByUsername(username: String): List<ProjectUser> {
+        val user = userService.getUserByUsername(username)
+        return getProjectUserByUserId(user.id)
+    }
 }

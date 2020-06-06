@@ -1,15 +1,20 @@
 import React from "react";
 import classsnames from "classnames";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import DeleteProjectTask from "./DeleteProjectTasj";
+import {connect} from "react-redux";
+import {getProjectAccess} from "../../../actions/ProjectActions";
 
-const mapPriority = priority => {
+export const mapPriority = priority => {
   if (priority === 1) return "HIGH";
   if (priority === 2) return "MEDIUM";
   if (priority === 3) return "LOW";
 };
 
-const ProjectTask = ({ projectTask }) => {
+const ProjectTask = ({projectTask, hasAccess, getProjectAccess}) => {
+  React.useEffect(() => {
+    getProjectAccess(projectTask.projectIdentifier)
+  }, [projectTask])
   const {
     projectSequence,
     summary,
@@ -32,19 +37,27 @@ const ProjectTask = ({ projectTask }) => {
         <p className="card-text text-truncate ">
           {acceptanceCriteria && acceptanceCriteria}
         </p>
-        <Link
+        {hasAccess && <Link
           to={`/updateProjectTask/${
             projectTask.projectIdentifier
           }/${projectSequence}`}
           className="btn btn-primary"
         >
           View / Update
-        </Link>
-
-        <DeleteProjectTask backlog_id={projectTask.projectIdentifier} pt_id={projectSequence} />
+        </Link>}
+        {hasAccess && <DeleteProjectTask backlog_id={projectTask.projectIdentifier} pt_id={projectSequence}/>}
       </div>
     </div>
   );
 };
 
-export default ProjectTask;
+const mapStateToProps = state => ({
+  hasAccess: state.project.hasAccess,
+});
+
+const withConnect = connect(
+  mapStateToProps,
+  {getProjectAccess}
+)
+
+export default withConnect(ProjectTask);

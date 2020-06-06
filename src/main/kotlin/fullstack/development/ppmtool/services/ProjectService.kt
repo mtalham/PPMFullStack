@@ -13,13 +13,12 @@ import java.lang.Exception
 class ProjectService(
     private val projectRepository: ProjectRepository,
     private val backlogRepository: BacklogRepository,
-    private val userRepository: UserRepository,
+    private val userService: UserService,
     private val securityController: SecurityController,
     private val projectUserService: ProjectUserService
 ) {
     fun createProject(project: Project): Project {
-        val user = userRepository.findByUsername(securityController.currentUserName())
-            ?: throw ProjectException("unable to find user ${securityController.currentUserName()}")
+        val user = userService.getUserByUsername(securityController.currentUserName())
         val newProject = Project(
             projectName = project.projectName,
             projectIdentifier = project.projectIdentifier.toUpperCase(),
@@ -42,12 +41,17 @@ class ProjectService(
         }
     }
 
-    fun findProjectByIdentifier(identifier: String): Project =
-        projectRepository.findProjectByProjectIdentifierAndProjectLeader(identifier.toUpperCase(), securityController.currentUserName())
-            ?: throw ProjectException("Unable to find project with ID: '$identifier'")
+    fun findProjectByIdentifier(identifier: String): Project {
+        val project = projectRepository.findProjectByProjectIdentifier(identifier.toUpperCase())
+          ?: throw ProjectException("Unable to find project with ID: '$identifier'")
+        val projectUsers = projectUserService.getProjectUserByUsername(securityController.currentUserName())
+        if (project.id in projectUsers.map { it.projectId } || project.projectLeader == securityController.currentUserName()) {
+            return project
+        } else throw ProjectException("User ${securityController.currentUserFullName()} does not have access to this Project")
+    }
 
     fun findAllProjects(userName: String): List<Project> {
-        val user = userRepository.findByUsername(userName) ?: throw ProjectException("unable to find user $userName")
+        val user = userService.getUserByUsername(userName)
         val projectUser = projectUserService.getProjectUserByUserId(user.id)
         return projectRepository
             .findAll()
@@ -75,7 +79,7 @@ class ProjectService(
         return projectRepository.save(existingProject)
     }
 
-    fun getProjectIdByProjectIdentifier(projectId: String) =
+    fun getProjectIdByProjectIdentifier(projectId: String): Long =
         projectRepository.findProjectByProjectIdentifier(projectId)?.id
             ?: throw ProjectException("Unable to find project with ID: $projectId")
 

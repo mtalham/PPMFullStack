@@ -27,7 +27,7 @@ if (token) {
     payload: decodedToken
   });
   const currentTime = Date.now() / 1000;
-  console.log(decodedToken.exp, currentTime);
+  // console.log(decodedToken.exp, currentTime);
   if (decodedToken.exp < currentTime) {
     //handle Logout
     store.dispatch(logout());
