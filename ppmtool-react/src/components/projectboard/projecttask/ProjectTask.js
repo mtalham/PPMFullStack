@@ -22,7 +22,7 @@ const ProjectTask = ({projectTask, hasAccess, getProjectAccess}) => {
     acceptanceCriteria
   } = projectTask;
   return (
-    <div className="card mb-1 bg-light">
+    <div className="card mb-1">
       <div
         className={classsnames("card-header text-primary", {
           "bg-danger text-light": priority === 1,
@@ -32,7 +32,7 @@ const ProjectTask = ({projectTask, hasAccess, getProjectAccess}) => {
       >
         ID: {projectSequence} -- Priority: {mapPriority(priority)}
       </div>
-      <div className="card-body bg-light">
+      <div className="card-body">
         <h5 className="card-title">{summary}</h5>
         <p className="card-text text-truncate ">
           {acceptanceCriteria && acceptanceCriteria}

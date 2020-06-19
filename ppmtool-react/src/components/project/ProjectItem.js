@@ -9,7 +9,7 @@ const ProjectItem = ({ projects }) => {
         projects.map(project => (
           <div
             key={project.projectIdentifier}
-            className="card card-body bg-light mb-3"
+            className="card card-body mb-3"
           >
             <div className="row">
               <div className="col-2">
