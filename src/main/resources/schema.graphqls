@@ -1,13 +1,29 @@
 type Query {
     hello: String!
     users: [User!]!
+    projects: [Project!]!
 }
 
 type Mutation {
     addUserToProject(username: String!, projectId: String!): Boolean!
+    addProject(projectIdentifier: String!, projectName: String!, description: String!, projectLeader: String): Project!
 }
 
 type User {
     username: String!
     fullName: String!
+}
+
+input ProjectInput {
+    projectIdentifier: String!
+    projectName: String!
+    description: String!
+    projectLeader: String
+}
+
+type Project {
+    projectIdentifier: String!
+    projectName: String!
+    description: String!
+    projectLeader: String
 }
