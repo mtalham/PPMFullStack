@@ -27,7 +27,47 @@ class SecurityConfig(
     private val jwtAuthenticationFilter: JwtAuthenticationFilter
 ) : WebSecurityConfigurerAdapter() {
 //    @Bean
-//    fun jwtAuthenticationFilter() = JwtAuthenticationFilter()
+//    @Throws(Exception::class)
+//    fun authenticationManager(authenticationConfiguration: AuthenticationConfiguration): AuthenticationManager? {
+//        return authenticationConfiguration.authenticationManager
+//    }
+//
+//
+//    @Bean
+//    @Throws(Exception::class)
+//    fun filterChain(http: HttpSecurity): SecurityFilterChain? {
+//        http.cors().and().csrf().disable()
+//            .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and()
+//            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+//            .headers().frameOptions().sameOrigin() //to be able to use H2 database
+//            .and().authorizeRequests().antMatchers("/",
+//                "/favicon.ico",
+//                "/**/*.png",
+//                "/**/*.gif",
+//                "/**/*.svg",
+//                "/**/*.jpg",
+//                "/**/*.html",
+//                "/**/*.css",
+//                "/**/*.js").permitAll()
+//            .antMatchers(GRAPIHQL_URL).permitAll()
+//            .antMatchers("/api/graphql").permitAll()
+//            .antMatchers(SIGN_UP_URLS).permitAll()
+//            .antMatchers(H2_URL).permitAll()
+//            .anyRequest().authenticated()
+//        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)
+////        http.addFilterBefore(authenticationJwtTokenFilter, UsernamePasswordAuthenticationFilter::class.java)
+//        return http.build()
+//    }
+
+//    @Bean
+//    fun corsConfigurer(): WebMvcConfigurer? {
+//        return object : WebMvcConfigurer {
+//            override fun addCorsMappings(registry: CorsRegistry) {
+//                registry.addMapping("/**")
+//                    .allowedMethods("*")
+//            }
+//        }
+//    }
 
     override fun configure(http: HttpSecurity) {
         http.cors().and().csrf().disable()

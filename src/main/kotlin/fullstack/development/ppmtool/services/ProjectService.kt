@@ -5,10 +5,9 @@ import fullstack.development.ppmtool.domain.Project
 import fullstack.development.ppmtool.exceptions.ProjectException
 import fullstack.development.ppmtool.repositories.BacklogRepository
 import fullstack.development.ppmtool.repositories.ProjectRepository
-import fullstack.development.ppmtool.repositories.UserRepository
 import fullstack.development.ppmtool.web.SecurityController
 import org.springframework.stereotype.Service
-import java.lang.Exception
+
 @Service
 class ProjectService(
   private val projectRepository: ProjectRepository,

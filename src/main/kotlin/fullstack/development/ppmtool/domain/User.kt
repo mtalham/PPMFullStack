@@ -8,13 +8,9 @@ import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
 import javax.persistence.Transient
-import javax.validation.constraints.Email
-import javax.validation.constraints.NotEmpty
 
 @Entity
 data class User(
-    @field:NotEmpty(message = "Cannot be empty")
-    @field:Email(message = "Invalid email")
     private val username: String,
     val fullName: String,
     private val password: String,

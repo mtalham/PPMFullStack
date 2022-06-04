@@ -14,13 +14,6 @@ type User {
     fullName: String!
 }
 
-input ProjectInput {
-    projectIdentifier: String!
-    projectName: String!
-    description: String!
-    projectLeader: String
-}
-
 type Project {
     projectIdentifier: String!
     projectName: String!

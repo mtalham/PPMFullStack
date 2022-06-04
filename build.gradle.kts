@@ -1,16 +1,16 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("plugin.jpa") version "1.2.71"
-    id("org.springframework.boot") version "2.1.5.RELEASE"
-    id("io.spring.dependency-management") version "0.6.0.RELEASE"
-    kotlin("jvm") version "1.2.71"
+    kotlin("plugin.jpa") version "1.6.21"
+    id("org.springframework.boot") version "2.7.0"
+    id("io.spring.dependency-management") version "1.0.11.RELEASE"
+    kotlin("jvm") version "1.6.21"
     kotlin("plugin.spring") version "1.2.71"
 }
 
 group = "fullstack.development"
 version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_1_8
+java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenCentral()
@@ -22,12 +22,12 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    compile("com.graphql-java-kickstart:graphql-spring-boot-starter:5.0.5")
-    compile("com.graphql-java-kickstart:graphiql-spring-boot-starter:5.0.5")
-    compile("com.graphql-java-kickstart:graphql-java-tools:5.3.5")
-    compile("org.springframework.boot:spring-boot-starter-security")
-    compile("com.google.code.gson:gson")
-    compile("io.jsonwebtoken:jjwt:0.2")
+    implementation("com.graphql-java-kickstart:graphql-spring-boot-starter:12.0.0")
+    implementation("com.graphql-java-kickstart:graphiql-spring-boot-starter:11.1.0")
+    implementation("com.graphql-java-kickstart:graphql-java-tools:12.1.0")
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("com.google.code.gson:gson")
+    implementation("io.jsonwebtoken:jjwt:0.9.1")
     runtimeOnly("org.springframework.boot:spring-boot-devtools")
     runtimeOnly("com.h2database:h2")
     runtimeOnly("mysql:mysql-connector-java")
@@ -37,6 +37,6 @@ dependencies {
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
 }
